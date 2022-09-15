@@ -2,17 +2,17 @@ use sycamore::prelude::*;
 
 #[derive(Prop)]
 struct Props<'a> {
-        input: &'a Signal<String>,
-    }
+    input: &'a Signal<String>,
+}
 
 #[component]
 fn OtherComponent<'a, G: Html>(cx: Scope<'a>, props: Props<'a>) -> View<G> {
     view! { cx,
         (
-            if props.input.get().is_empty() {
-                view! { cx, "Empty"}
-            } else {
+            if !props.input.get().is_empty() {
                 view! { cx, (props.input.get())}
+            } else {
+                view! { cx, "Empty"}
             }
         )
     }
@@ -24,7 +24,7 @@ fn App<G: Html>(cx: Scope) -> View<G> {
 
     view! { cx,
         p {
-            input(bind:value=input, type="email")
+            input(bind:value=input, type="text", placeholder="Type here")
         }
         OtherComponent(input=input)
     }
