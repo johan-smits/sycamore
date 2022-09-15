@@ -8,10 +8,13 @@ struct Props<'a> {
 #[component]
 fn OtherComponent<'a, G: Html>(cx: Scope<'a>, props: Props<'a>) -> View<G> {
 
-
-    view! { cx,
-        p {
-            (props.input.get())
+    if props.input.get().is_empty() {
+        view! { cx, "Empty" }
+    } else {
+        view! { cx,
+            p {
+                (props.input.get())
+            }
         }
     }
 }
