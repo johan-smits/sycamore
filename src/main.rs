@@ -3,7 +3,7 @@ use sycamore::prelude::*;
 
 #[derive(Prop)]
 struct Props {
-    input: RcSignal<String>,
+    input: Rc<String>,
 }
 
 #[component]
