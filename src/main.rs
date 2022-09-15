@@ -1,18 +1,17 @@
-use std::rc::Rc;
 use sycamore::prelude::*;
 
 #[derive(Prop)]
-struct Props {
-    input: Rc<String>,
-}
+struct Props<'a> {
+        input: &'a Signal<String>,
+    }
 
 #[component]
-fn OtherComponent<G: Html>(cx: Scope, props: Props) -> View<G> {
+fn OtherComponent<'a, G: Html>(cx: Scope<'a>, props: Props<'a>) -> View<G> {
 
 
     view! { cx,
         p {
-            (props.input)
+            (props.input.get())
         }
     }
 }
@@ -25,7 +24,7 @@ fn App<G: Html>(cx: Scope) -> View<G> {
         p {
             input(bind:value=input, type="email")
         }
-        OtherComponent(input=input.get())
+        OtherComponent(input=input)
     }
 }
 
