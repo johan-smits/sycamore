@@ -177,6 +177,7 @@ dependencies = [
  "reqwasm",
  "serde",
  "sycamore",
+ "wasm-bindgen-futures",
  "web-sys",
 ]
 

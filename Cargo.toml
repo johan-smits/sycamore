@@ -9,6 +9,7 @@ edition = "2021"
 sycamore = { version = "0.8", features=["hydrate", "suspense", "ssr"] }
 reqwasm = "0.5"
 serde = "1.0"
+wasm-bindgen-futures = "0.4"
 
 [dependencies.web-sys]
 version = "0.3"

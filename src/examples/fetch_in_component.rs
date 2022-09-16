@@ -1,6 +1,7 @@
 use sycamore::prelude::*;
 use reqwasm::http::Request;
 use serde::{Deserialize, Serialize};
+use sycamore::futures::spawn_local_scoped;
 
 const API_BASE_URL: &str = "https://official-joke-api.appspot.com/random_joke";
 
@@ -24,11 +25,13 @@ pub(crate) async fn UpdateFetchInComponent<G: Html>(cx: Scope<'_>) -> View<G> {
     let new_joke = fetch_joke().await.expect("Unable to retrieve new joke");
     let joke = create_signal(cx, new_joke);
 
-    let on_btn_click = |_| {
-        // match fetch_joke().await {
-        //     Ok(new_joke) => joke.set(new_joke),
-        //     Err(_) => {}
-        // }
+    let on_btn_click = move |_| {
+        spawn_local_scoped(cx, async move {
+            match fetch_joke().await {
+                Ok(new_joke) => joke.set(new_joke),
+                Err(_) => {}
+            }
+        });
     };
 
     view! { cx,
