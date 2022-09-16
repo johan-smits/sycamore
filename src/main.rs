@@ -1,37 +1,33 @@
 use sycamore::prelude::*;
+use sycamore::suspense::Suspense;
 
-#[derive(Prop)]
-struct Props<'a> {
-    input: &'a Signal<String>,
-}
+mod examples;
 
 #[component]
-fn OtherComponent<'a, G: Html>(cx: Scope<'a>, props: Props<'a>) -> View<G> {
-    view! { cx,
-        (
-            if !props.input.get().is_empty() {
-                view! { cx, (props.input.get())}
-            } else {
-                view! { cx, "Empty"}
-            }
-        )
-    }
-}
-
-#[component]
-fn App<G: Html>(cx: Scope) -> View<G> {
+async fn App<G: Html>(cx: Scope<'_>) -> View<G> {
     let input = create_signal(cx, String::new());
 
     view! { cx,
-        p {
-            input(bind:value=input, type="text", placeholder="Type here")
-        }
-        OtherComponent(input=input)
+        // Example Other component reactive
+        h1 {"Reactive component"}
+        p {input(bind:value=input, type="text", placeholder="Type here")}
+        examples::OtherComponent(input=input)
+
+        hr {}
+
+        // Example fetch new joke and show the joke
+        h1 {"Fetch on button action"}
+        examples::UpdateFetchInComponent
+
     }
 }
 
 fn main() {
     sycamore::render(|cx| {
-        view! { cx, App {} }
+        view! { cx,
+            Suspense(fallback=view! { cx, "Loading any async event..." }) {
+                App {}
+            }
+        }
     });
 }
