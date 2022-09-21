@@ -9,6 +9,7 @@ async fn App<G: Html>(cx: Scope<'_>) -> View<G> {
 
     view! { cx,
         // Example Other component reactive
+        /*
         h1 {"Reactive component"}
         p {input(bind:value=input, type="text", placeholder="Type here")}
         examples::OtherComponent(input=input)
@@ -18,6 +19,13 @@ async fn App<G: Html>(cx: Scope<'_>) -> View<G> {
         // Example fetch new joke and show the joke
         h1 {"Fetch on button action"}
         examples::UpdateFetchInComponent
+
+        hr {}
+        */
+
+        // Example fetch new joke and show the joke
+        h1 {"SVG size test"}
+        examples::Svg
 
     }
 }
