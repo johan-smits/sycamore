@@ -1,40 +1,13 @@
 use sycamore::prelude::*;
-use sycamore::suspense::Suspense;
-
-mod examples;
-
-#[component]
-async fn App<G: Html>(cx: Scope<'_>) -> View<G> {
-    let input = create_signal(cx, String::new());
-
-    view! { cx,
-        // Example Other component reactive
-        /*
-        h1 {"Reactive component"}
-        p {input(bind:value=input, type="text", placeholder="Type here")}
-        examples::OtherComponent(input=input)
-
-        hr {}
-
-        // Example fetch new joke and show the joke
-        h1 {"Fetch on button action"}
-        examples::UpdateFetchInComponent
-
-        hr {}
-        */
-
-        // Example fetch new joke and show the joke
-        h1 {"SVG size test"}
-        examples::Svg
-
-    }
-}
 
 fn main() {
     sycamore::render(|cx| {
         view! { cx,
-            Suspense(fallback=view! { cx, "Loading any async event..." }) {
-                App {}
+            h1 {"SVG size test"}
+            svg(xmlns="http://www.w3.org/2000/svg", aria-label="Flickr", role="img", viewbox="0 0 512 512") {
+                rect(width="512", height="512", rx="15%", fill="#fff") {}
+                circle(cx="157", cy="256", fill="#0063dc", r="79") {}
+                circle(cx="355", cy="256", fill="#ff0084", r="79") {}
             }
         }
     });
