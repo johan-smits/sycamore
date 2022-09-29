@@ -6,13 +6,13 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-sycamore = { version = "0.8", features=["hydrate", "suspense", "ssr"] }
-reqwasm = "0.5"
-serde = "1.0"
-wasm-bindgen-futures = "0.4"
+sycamore = { version = "0.8.2", features=["hydrate", "suspense", "ssr"] }
+reqwasm = "0.5.0"
+serde = "1.0.145"
+wasm-bindgen-futures = "0.4.33"
 
 [dependencies.web-sys]
-version = "0.3"
+version = "0.3.60"
 features = [
     "Blob",
     "BlobPropertyBag",
