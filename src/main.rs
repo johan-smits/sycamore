@@ -19,6 +19,19 @@ async fn App<G: Html>(cx: Scope<'_>) -> View<G> {
         h1 {"Fetch on button action"}
         examples::UpdateFetchInComponent
 
+        hr {}
+
+        // Component with sub item
+        h1 {"Sub component"}
+        examples::DrawerOverlay {
+            div(class="w-full h-full flex flex-col items-center") {
+                examples::TitleBar
+                div {
+                    "Home!"
+                }
+            }
+        }
+
     }
 }
 
